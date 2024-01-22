@@ -1,0 +1,192 @@
+﻿@model SaggiTimeSheetAPP.Models.DTO.TimesheetDTO
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h1>Create</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<h2>Weekly Timesheet</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form id="timesheetForm" method="post">
+                <div class="form-group">
+                    <label asp-for="UserId" class="control-label"></label>
+                    <input asp-for="UserId" class="form-control" />
+                    <span asp-validation-for="UserId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="WeekStarting" class="control-label"></label>
+                    <input asp-for="WeekStarting" class="form-control" />
+                    <span asp-validation-for="WeekStarting" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SubmissionDate" class="control-label"></label>
+                    <input asp-for="SubmissionDate" class="form-control" />
+                    <span asp-validation-for="SubmissionDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ApprovalStatus" class="control-label"></label>
+                    <select asp-for="ApprovalStatus" class="form-control">
+                        <option value="Submitted">Submitted</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="Approved">Approved</option>
+                    </select>
+                    <span asp-validation-for="ApprovalStatus" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TotalHours" class="control-label"></label>
+                    <input asp-for="TotalHours" class="form-control" />
+                    <span asp-validation-for="TotalHours" class="text-danger"></span>
+                </div>
+
+                <!-- Inside the form tag in your Create.cshtml file -->
+                <div id="timesheet-Entry-Container" class="form-group">
+                    @for (var i = 0; i < Model.WST.Count; i++)
+                    {
+                        <div class="form-group">
+                            <label asp-for="WST[i].EntryDate" class="control-label"></label>
+                            <input asp-for="WST[i].EntryDate" id="EntryDate" class="form-control" type="date" required />
+                            <span asp-validation-for="WST[i].EntryDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="WST[i].ProjectId" class="control-label"></label>
+                            <input asp-for="WST[i].ProjectId" class="form-control" />
+                            <span asp-validation-for="WST[i].ProjectId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="WST[i].HoursWorked" class="control-label"></label>
+                            <input asp-for="WST[i].HoursWorked" class="form-control" />
+                            <span asp-validation-for="WST[i].HoursWorked" class="text-danger"></span>
+                        </div>
+                    }
+                </div>
+
+                <table class="table" id="entriesTable">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Total Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody id="timesheetBody"></tbody>
+                </table>
+                <div class="form-group">
+                    <button type="button" id="add-Time-Entry" class="btn btn-secondary">Add Time Entry</button>
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="TotalHours" class="control-label">Total Hours</label>
+                    <input asp-for="TotalHours" class="form-control" readonly />
+                    <span asp-validation-for="TotalHours" class="text-danger"></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("add-Time-Entry").addEventListener("click", function () {
+        var container = document.getElementById("timesheet-Entry-Container");
+        var currentIndex = container.childElementCount;
+
+        var newTimeEntryHtml = `<div class="form-group">
+                    <label asp-for="WST[${currentIndex}].EntryDate" class="control-label"></label>
+                    <input asp-for="WST[${currentIndex}].EntryDate" class="form-control" type="date" required />
+                    <span asp-validation-for="WST[${currentIndex}].EntryDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="WST[${currentIndex}].ProjectId" class="control-label"></label>
+                    <input asp-for="WST[${currentIndex}].ProjectId" class="form-control" />
+                    <span asp-validation-for="WST[${currentIndex}].ProjectId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="WST[${currentIndex}].HoursWorked" class="control-label"></label>
+                    <input asp-for="WST[${currentIndex}].HoursWorked" class="form-control" />
+                    <span asp-validation-for="WST[${currentIndex}].HoursWorked" class="text-danger"></span>
+                </div>`;
+
+        var newTimeEntryDiv = document.createElement("div");
+        newTimeEntryDiv.innerHTML = newTimeEntryHtml;
+        container.appendChild(newTimeEntryDiv);
+    });
+
+    function updateTimesheet() {
+        var entryDate = new Date(document.getElementById("EntryDate").value);
+        var container = document.getElementById("timesheetBody");
+        var totalHoursInput = document.getElementById("TotalHours");
+
+        var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        container.innerHTML = "";
+
+        var sundayDate = new Date(entryDate);
+        sundayDate.setDate(entryDate.getDate() - entryDate.getDay());
+
+        var totalHours = 0;
+
+        for (var i = 0; i < 7; i++) {
+            var cellDay = document.createElement("td");
+            cellDay.innerHTML = daysOfWeek[sundayDate.getDay()] + '<br>' + (sundayDate.getMonth() + 1) + '/' + sundayDate.getDate();
+            container.appendChild(cellDay);
+
+            var cellHours = document.createElement("td");
+            var inputHours = document.createElement("input");
+            inputHours.type = "text";
+            inputHours.className = "form-control";
+            inputHours.placeholder = "Enter hours";
+            inputHours.name = "hours[" + i + "]";
+            inputHours.addEventListener("input", function () {
+                totalHours = 0;
+                for (var j = 0; j < 7; j++) {
+                    var input = document.getElementsByName("hours[" + j + "]")[0];
+                    if (input && !isNaN(input.value)) {
+                        totalHours += parseFloat(input.value);
+                    }
+                }
+                totalHoursInput.value = totalHours.toFixed(2);
+                updateProjectTotalHours(); // Call the function to update project-wise total hours
+            });
+            cellHours.appendChild(inputHours);
+            container.appendChild(cellHours);
+
+            sundayDate.setDate(sundayDate.getDate() + 1);
+        }
+    }
+
+    document.getElementById("EntryDate").addEventListener("change", updateTimesheet, true);
+
+    // Trigger the update when the page loads
+    updateTimesheet();
+
+    // Function to update project-wise total hours
+    function updateProjectTotalHours() {
+        var projectsContainer = document.getElementById("timesheetBody");
+        var projects = projectsContainer.getElementsByTagName("tr");
+
+        for (var i = 0; i < projects.length; i++) {
+            var project = projects[i];
+            var projectTotal = 0;
+
+            // Loop through project rows and sum the hours
+            for (var j = 1; j < project.cells.length; j++) {
+                var input = project.cells[j].getElementsByTagName("input")[0];
+                if (input && !isNaN(input.value)) {
+                    projectTotal += parseFloat(input.value);
+                }
+            }
+
+            // Display the total in the second cell of the project row
+            project.cells[1].innerHTML = projectTotal.toFixed(2);
+        }
+    }
+</script>
+@* @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} *@

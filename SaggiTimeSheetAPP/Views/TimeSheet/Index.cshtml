@@ -1,0 +1,87 @@
+﻿@model IEnumerable<SaggiTimeSheetAPP.Models.DTO.TimesheetDTO>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeSheetId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WeekStarting)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubmissionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApprovalStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalHours)
+            </th>
+            <th>
+                Project IDs
+            </th>
+            <th>
+                Hours Worked
+            </th>
+            <th>Edit</th>
+            <th>Details</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeSheetId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WeekStarting)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubmissionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApprovalStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalHours)
+            </td>
+                <td>
+                    @foreach (var ts in item.WST)
+                    {
+                        <div>
+                            @ts.ProjectId
+                        </div>
+                    }
+                </td>
+                <td>
+                    @foreach (var ts in item.WST)
+                    {
+                        <div>
+                            @ts.HoursWorked
+                        </div>
+                    }
+                </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.TimeSheetId }) |
+                </td>
+                <td>
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                </td>
+                <td>
+                @Html.ActionLink("Delete", "Delete", new { id=item.TimeSheetId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

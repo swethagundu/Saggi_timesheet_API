@@ -1,0 +1,149 @@
+﻿<div class="bg-white p-8">
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-2xl font-bold">Employee Timesheet</h1>
+        <div>
+            <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 mr-2">
+                Previous Period
+            </button>
+            <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+                Next Period
+            </button>
+        </div>
+    </div>
+    <div class="grid grid-cols-2 gap-4 mb-6">
+        <button type="button"
+                role="combobox"
+                aria-controls="radix-:r21:"
+                aria-expanded="false"
+                aria-autocomplete="none"
+                dir="ltr"
+                data-state="closed"
+                data-placeholder=""
+                class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                id="viewBy">
+            <span style="pointer-events: none;">Pay Period</span>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="24"
+                 height="24"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 class="h-4 w-4 opacity-50"
+                 aria-hidden="true">
+                <path d="m6 9 6 6 6-6"></path>
+            </svg>
+        </button>
+        <div class="flex space-x-2">
+            <input type="date"
+                   class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                   id="startDate">
+        </div>
+
+    </div>
+    <div class="relative w-full overflow-auto">
+        <table class="w-full caption-bottom text-sm">
+            <thead class="[&amp;_tr]:border-b">
+                <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 w-[120px]">
+                        Sun 12/13
+                    </th>
+                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 w-[120px]">
+                        Mon 12/14
+                    </th>
+                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 w-[120px]">
+                        Tue 12/15
+                    </th>
+                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 w-[120px]">
+                        Wed 12/16
+                    </th>
+                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 w-[120px]">
+                        Thu 12/17
+                    </th>
+                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 w-[120px]">
+                        Fri 12/18
+                    </th>
+                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 w-[120px]">
+                        Sat 12/19
+                    </th>
+                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                        Total
+                    </th>
+                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                        Time Reporting Code
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="[&amp;_tr:last-child]:border-0">
+                <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 font-medium">Total Hours</td>
+                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 font-medium">0.00</td>
+                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 font-medium">0.00</td>
+                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 font-medium">0.00</td>
+                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 font-medium">0.00</td>
+                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 font-medium">0.00</td>
+                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 font-medium">0.00</td>
+                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 font-medium">0.00</td>
+                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
+                        <button type="button"
+                                role="combobox"
+                                aria-controls="radix-:r22:"
+                                aria-expanded="false"
+                                aria-autocomplete="none"
+                                dir="ltr"
+                                data-state="closed"
+                                data-placeholder=""
+                                class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                id="timeCode">
+                            <span style="pointer-events: none;">Select</span>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="24"
+                                 height="24"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 class="h-4 w-4 opacity-50"
+                                 aria-hidden="true">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="flex justify-end mt-4">
+        @* <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 mr-2">
+            Save for Later
+        </button> *@
+        <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+            Submit
+        </button>
+    </div>
+    @* <div class="mt-6">
+        <div dir="ltr" data-orientation="horizontal">
+            <div class="tabs">
+                <a class="tab tab-lifted" href="#">
+                    Reported Time Status
+                </a>
+                <a class="tab tab-lifted" href="#">
+                    Leave / Compensatory Time
+                </a>
+                <a class="tab tab-lifted" href="#">
+                    Absence
+                </a>
+                <a class="tab tab-lifted" href="#">
+                    Exceptions
+                </a>
+                <a class="tab tab-lifted" href="#">
+                    Payable Time Detail
+                </a>
+            </div>
+        </div>
+    </div> *@
+</div>

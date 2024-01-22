@@ -1,0 +1,31 @@
+﻿<script>
+    function updateTimesheet() {
+        var entryDate = new Date(document.getElementById("EntryDate").value);
+        var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var tableBody = document.getElementById("timesheetBody");
+        tableBody.innerHTML = "";
+
+        var sundayDate = new Date(entryDate);
+        sundayDate.setDate(entryDate.getDate() - entryDate.getDay());
+
+        var daysRow = document.createElement("tr");
+        for (var i = 0; i < 14; i++) {
+            var cellDay = document.createElement("td");
+            cellDay.innerHTML = daysOfWeek[sundayDate.getDay()] + '<br>' + (sundayDate.getMonth() + 1) + '/' + sundayDate.getDate();
+            daysRow.appendChild(cellDay);
+
+            sundayDate.setDate(sundayDate.getDate() + 1);
+        }
+        tableBody.appendChild(daysRow);
+
+        var hoursRow = document.createElement("tr");
+        for (var i = 0; i < 14; i++) {
+            var cellHours = document.createElement("td");
+            cellHours.innerHTML = "<input type='text' class='form-control' placeholder='Enter hours' name='hours[" + i + "]' />";
+            hoursRow.appendChild(cellHours);
+        }
+        tableBody.appendChild(hoursRow);
+    }
+
+    document.getElementById("EntryDate").addEventListener("change", updateTimesheet, true);
+</script>
